@@ -4,6 +4,8 @@
 #include <string>
 #include <Winternl.h>
 #include <iostream>
+#include <fstream>
+#include <assert.h>
 #pragma comment(lib, "ntdll.lib")
 #pragma warning(disable: 4996)
 #define IOCTL_READ_MEM CTL_CODE(FILE_DEVICE_UNKNOWN, 0x999, METHOD_OUT_DIRECT, FILE_ANY_ACCESS)
@@ -13,14 +15,14 @@
 EXTERN_C NTSTATUS NTAPI NtReadVirtualMemory(HANDLE, PVOID, PVOID, ULONG, PULONG);
 EXTERN_C NTSTATUS NTAPI NtWriteVirtualMemory(HANDLE, PVOID, PVOID, ULONG, PULONG);
 
-#pragma comment(lib, "MoaRpm.lib")
+//#pragma comment(lib, "MoaRpm.lib")
 
 class MoaRpm {
 public:
 	static enum MOA_MODE {
-		 STANDARD,
-		 NTDLL,
-		 KERNEL
+		STANDARD,
+		NTDLL,
+		KERNEL
 	};
 private:
 	DWORD pID;
@@ -33,7 +35,7 @@ private:
 	bool isElevated();
 
 	bool isTestMode();
-
+	const static unsigned char rawDriver[8304];
 	void init(DWORD pID, MOA_MODE AccessMode);
 public:
 	MoaRpm(DWORD pID, MOA_MODE AccessMode);

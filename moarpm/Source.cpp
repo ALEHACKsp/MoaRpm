@@ -3,9 +3,9 @@
 
 int main()
 {
-	//MoaRpm rpm("star wars battlefront", MoaRpm::MOA_MODE::KERNEL);
-	//MoaRpm rpm("star wars battlefront", MoaRpm::MOA_MODE::NTDLL);
-	MoaRpm rpm("star wars battlefront", MoaRpm::MOA_MODE::STANDARD);
+//	MoaRpm rpm("star wars battlefront", MoaRpm::MOA_MODE::KERNEL);
+	MoaRpm rpm("star wars battlefront", MoaRpm::MOA_MODE::NTDLL);
+	//MoaRpm rpm("star wars battlefront", MoaRpm::MOA_MODE::STANDARD);
 	auto pGameContext = rpm.read<DWORD_PTR>(0x142AE8080);
 	auto pPlayerManager = rpm.read<DWORD_PTR>(pGameContext + 0x68);
 	auto pLocalPlayer = rpm.read<DWORD_PTR>(pPlayerManager + 0x550);
